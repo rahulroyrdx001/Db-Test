@@ -15,7 +15,22 @@ mongoose.connect(process.env.MONGO_URI, {
   .catch(err => console.error(err));
 
 // Schema & Model
-const ShowSchema = new mongoose.Schema({ title: String, genre: String, rating: Number });
+// const ShowSchema = new mongoose.Schema({ title: String, genre: String, rating: Number });
+// Show Model
+const ShowSchema = new mongoose.Schema({
+    show_id: { type: String, required: true, unique: true },
+    type: String,
+    title: String,
+    director: String,
+    cast: String,
+    country: String,
+    date_added: String,
+    release_year: Number,
+    rating: String,
+    duration: String,
+    listed_in: String,
+    description: String
+});
 const Show = mongoose.model('Show', ShowSchema);
 
 // API Route
