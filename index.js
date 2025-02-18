@@ -96,9 +96,15 @@ app.get('/api/shows', async (req, res) => {
         if (type) {
             query.type = { $regex: new RegExp(type, 'i') }; // Case-insensitive filter for "Movie" or "TV Show"
         }
+        if (query == "") {
+            const shows = await Show.find();
+            res.json(shows);
+        }
+        else {
+            const shows = await Show.find(query);
+            res.json(shows);
+        }
 
-        const shows = await Show.find(query);
-        res.json(shows);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
